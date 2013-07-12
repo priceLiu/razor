@@ -1,0 +1,30 @@
+@using System.Reflection
+@using System.Web
+
+Hello @Context.FirstName! Your entry was entered on: @Context.Entered
+
+@{
+    // Code block: Update the host Windows Form passed in through the context
+    Context.WinForm.Text = "Hello World from Razor at " + DateTime.Now.ToString();
+}
+
+AppDomain Id:
+    @AppDomain.CurrentDomain.FriendlyName
+            
+Assembly:
+    @Assembly.GetExecutingAssembly().FullName    
+
+Code based output: 
+@{
+    // Write output with Response object from code
+    string output = string.Empty;
+    for (int i = 0; i < 10; i++)
+    {
+        output += i.ToString() + " ";
+    }
+    Response.Write(output);
+
+    string encoded = "Here's <\"some\"> text";
+}
+
+

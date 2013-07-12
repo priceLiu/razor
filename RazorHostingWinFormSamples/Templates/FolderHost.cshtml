@@ -1,0 +1,96 @@
+@using System.Reflection
+
+@using RazorHostingWinForm
+
+@{
+    CustomContext Model = Context as CustomContext;
+}
+
+
+@Model.FirstName
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title></title>
+    <link href="css/westwind.css"  type="text/css" rel="Stylesheet" />  
+</head>
+<body style="margin-bottom: 20px;">
+<div style="background: lightsteelblue; padding: 5px 10px 5px 5px;">
+    <div style="font-style: italic">Razor Hosting Examples</div>
+    <div style="font-weight: bold">Runtime Hosting Razor Templates in Folders</div>
+</div>
+
+<div class="containercontent">
+
+<div class="notebox">
+    </p>
+    This example form demonstrates how to load templates from a folder and
+    cache them so that they don't need to recompile and create a new assembly
+    on every load. Only when the source changes is a new assembly created.
+    </p>
+    <p>
+    The assembly is loaded into a separate and unloadable AppDomain.
+    </p> 
+</div>
+
+<div class="containercontent">
+    <div class="gridheader">
+    Simple dynamic Expressions
+    @Context.Entered
+    </div>
+    <div class="containercontent">
+        <ul>
+            <li>Current Date Time: @DateTime.Now</li>
+            <li>Current Path: @Environment.CurrentDirectory</li>
+            <li>TemplatePath: @Context.TemplatePath</li>
+            <li>TemplateRelativePath: @Context.TemplateRelativePath</li>
+        </ul>
+    </div>
+
+    <div class="gridheader">
+        Assembly/AppDomain Information
+    </div>
+    <div class="containercontent">
+        <ul>
+            
+            <li><b>AppDomain Id:</b><br />
+             @AppDomain.CurrentDomain.FriendlyName<br /></li>
+            <li><b>Assembly:</b></br>
+             @Assembly.GetExecutingAssembly().FullName</li>
+        </ul>
+    </div>
+    
+	
+    <div class="gridheader">
+    Code Generated Output:
+    </div>
+
+    <div class="containercontent">
+    @{
+        string output = string.Empty;
+        for (int i = 0; i < 10; i++)
+        {
+            output += i.ToString() + " ";
+        }
+        Response.Write("Generated coded output: " + output);
+    }
+    </div>    
+</div>
+</div>
+
+    @{
+        //Execute some arbitrary code - access context object and modify host form
+        Context.WinForm.Text = "Hello World from Razor at " + DateTime.Now.ToString();
+    }   
+
+
+    @RenderPartial(@"PartialRendering.cshtml", Context)
+
+    <hr />
+    <small>&copy; West Wind Technologies, 2010</small>
+    
+</body>
+</html>

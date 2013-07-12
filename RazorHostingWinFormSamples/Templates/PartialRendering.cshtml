@@ -1,0 +1,23 @@
+<div class="notebox">
+<h3>This is some partially rendered content</h3>
+
+This is partially rendered content from an external template
+that has been pulled into the main template.
+<hr />
+
+<ul>
+<li><b>AppDomain Id:</b><br />
+    @AppDomain.CurrentDomain.FriendlyName
+</li>         
+<li> <b>Assembly:</b><br />
+    @System.Reflection.Assembly.GetExecutingAssembly().FullName
+</li>
+</ul>
+
+<p>
+    Notice that the partial rendered template also gets its own
+    assembly that is also cached and re-used just like a main view.
+    It also gets the Context passed down from parent.    
+</p>
+
+</div>
